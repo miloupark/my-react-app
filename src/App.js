@@ -8,56 +8,41 @@ function Header(props) {
 };
 // 컴포넌트(Header) 안에 컴포넌트(Nav)를 넣을 수 있음 상단 참고
 
-function Nav() {
+function Nav(props) {
+  const list = props.nav.map((item, index) => (
+    <li key={index}>
+      <a href={"/sub" + item.title}>{item.title}</a>
+    </li>
+  )
+);
+
   return (
     <nav>
-        <ul>
-          <li>
-            <a href="/">html</a>
-          </li>
-          <li>
-            <a href="/">CSS</a>
-          </li>
-          <li>
-            <a href="/">js</a>
-          </li>
-        </ul>
-      </nav>
+      <ul>{list}</ul>
+    </nav>
   )
 };
 
-function Article (){
+function Article (props){
   return (
     <article>
-      <h2>타이틀1</h2>
-      <p>hello, react</p>
+      <h2>{props.title}</h2>
+      <p>{props.desc}</p>
     </article>
   )
 };
 
 function App() {
+  const navArr = [{title: "html"}, {title: "css"}, {title: "js"}];
   return (
     <div className="root"> 
       <Header title="리액트(React)"/>
-      <Nav/>
-      <Article/>
-      <Article/>
-      <Article/>
+      <Nav nav={navArr}/>
+      <Article title="리액트란?" desc="desc 1"/>
+      <Article title="컴포넌트란?" desc="desc 2"/>
+      <Article  title="props란?" desc="desc 3"/>
     </div>
   );
 }
 
 export default App;
-
-
-
-
-
-
-// 화살표 함수를 사용한 컴포넌트 (상단엔 일반함수로 표현해줌)
-// const App = () => {
-//   return
-//     <>
-//     리액트 공부중 28살 개미는 오늘도 공부를 해본다
-//     </>;
-// };
